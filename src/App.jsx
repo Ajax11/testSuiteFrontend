@@ -1,35 +1,46 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import './App.css';
+
+import { Layout, Menu, List, Avatar } from 'antd';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { UserOutlined, HomeOutlined } from '@ant-design/icons';
+
+import ArticlesPage from './pages/ArticlesPage';
+import ArticleFormPage from './pages/ArticleFormPage';
+
+const { Header, Sider, Content } = Layout;
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <BrowserRouter>
+      <Layout style={{ minHeight: '100vh' }}>
+        <Sider>
+          <Menu
+            theme="dark"
+            mode="inline"
+            defaultSelectedKeys={['1']}
+            items={[
+              { key: '1', label: <Link to="/">Articles</Link> },
+              { key: '2', label: <Link to="/articles/new">New Article</Link> },
+            ]}
+          />
+        </Sider>
+
+        <Layout>
+          <Header style={{ background: '#fff', padding: 0 }}>
+            <h3>Web Content</h3>
+          </Header>
+          <Content style={{ margin: '16px' }}>
+            <Routes>
+              <Route path="/" element={<ArticlesPage />} />
+              <Route path="/articles/new" element={<ArticleFormPage />} />
+              <Route path="/articles/:id/edit" element={<ArticleFormPage />} />
+            </Routes>
+            {/* <ArticlesPage /> */} {/* 👈 Aquí se muestra la página */}
+          </Content>
+        </Layout>
+      </Layout>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
