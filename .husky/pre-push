@@ -23,5 +23,5 @@ echo "✅ Trivy scan passed."
 #fi
 
 #echo "✅ Test phase passed. Push allowed ✔️"
-EOF
+
 
