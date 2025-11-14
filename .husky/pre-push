@@ -1,0 +1,27 @@
+#!/bin/bash
+
+echo "🔒 Running Trivy security scan"
+
+# Ejecutar trivy y fallar si detecta HIGH/CRITICAL
+trivy fs --quiet --exit-code 1 --severity HIGH,CRITICAL .
+TRIVY_STATUS=$?
+
+if [ $TRIVY_STATUS -ne 0 ]; then
+  echo "❌ Trivy detected vulnerabilities. Push blocked."
+  exit 1
+fi
+
+echo "✅ Trivy scan passed."
+
+echo "🧪 Running test phase"
+yarn test --run --passWithNoTests
+TEST_STATUS=$?
+
+if [ $TEST_STATUS -ne 0 ]; then
+  echo "❌ Tests failed. Push blocked."
+  exit 1
+fi
+
+echo "✅ Test phase passed. Push allowed ✔️"
+EOF
+
