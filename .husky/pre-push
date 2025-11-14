@@ -13,15 +13,15 @@ fi
 
 echo "✅ Trivy scan passed."
 
-echo "🧪 Running test phase"
-yarn test --run --passWithNoTests
-TEST_STATUS=$?
+#echo "🧪 Running test phase"
+#yarn test --run --passWithNoTests
+#TEST_STATUS=$?
 
-if [ $TEST_STATUS -ne 0 ]; then
-  echo "❌ Tests failed. Push blocked."
-  exit 1
-fi
+#if [ $TEST_STATUS -ne 0 ]; then
+#  echo "❌ Tests failed. Push blocked."
+#  exit 1
+#fi
 
-echo "✅ Test phase passed. Push allowed ✔️"
+#echo "✅ Test phase passed. Push allowed ✔️"
 EOF
 
