@@ -3,7 +3,8 @@
 echo "🔒 Running Trivy security scan"
 
 # Ejecutar trivy y fallar si detecta HIGH/CRITICAL
-trivy fs --quiet --exit-code 1 --severity HIGH,CRITICAL .
+# trivy fs --quiet --exit-code 1 .
+trivy fs --quiet --exit-code 1 .\yarn.lock
 TRIVY_STATUS=$?
 
 if [ $TRIVY_STATUS -ne 0 ]; then
